@@ -1,0 +1,70 @@
+import { Octicons } from "@expo/vector-icons";
+import * as Haptics from "expo-haptics";
+import { Link } from "expo-router";
+import { Pressable, View } from "react-native";
+
+import Heading from "./heading";
+
+type TitleBarProps = {
+  title?: string;
+  subtitle?: string;
+  secondaryNav?: React.ReactNode;
+  showBackButton?: boolean;
+  onBackButtonPress?: () => void;
+};
+
+function TitleBar({
+  title,
+  subtitle,
+  secondaryNav,
+  showBackButton = false,
+  onBackButtonPress = () => {},
+}: TitleBarProps) {
+  return (
+    <View className="w-full flex flex-col justify-center items-start py-12 pr-8 gap-3">
+      {subtitle && (
+        <Heading
+          className="pl-8"
+          text={subtitle}
+          variant="subtitle"
+          size="xl"
+          color="neutral"
+        />
+      )}
+
+      <View className="flex flex-row items-top justify-between w-full">
+        {showBackButton ? (
+          <Link href="/" asChild>
+            <Pressable
+              onPress={() => {
+                Haptics.impactAsync(
+                  Haptics.ImpactFeedbackStyle.Light,
+                );
+
+                onBackButtonPress();
+              }}
+              className="flex flex-row items-center gap-6 pl-8"
+            >
+              <Octicons
+                name="chevron-left"
+                size={24}
+                color="white"
+              />
+              <Heading text={title} size="4xl" />
+            </Pressable>
+          </Link>
+        ) : (
+          <Heading
+            text={title}
+            size="4xl"
+            className="pl-8"
+          />
+        )}
+
+        {secondaryNav && secondaryNav}
+      </View>
+    </View>
+  );
+}
+
+export default TitleBar;
