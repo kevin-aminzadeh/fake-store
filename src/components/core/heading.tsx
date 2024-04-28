@@ -22,12 +22,12 @@ function Heading({
   text,
   size = "4xl",
   variant = "title",
-  color = "light",
+  color = "dark",
   className,
 }: {
   text: string;
   size?: "5xl" | "4xl" | "3xl" | "2xl" | "xl";
-  color?: "light" | "neutral";
+  color?: "light" | "neutral" | "dark" | "black" | "white";
   variant?: "title" | "subtitle";
   className?: string;
 }) {
@@ -35,8 +35,14 @@ function Heading({
     <Text
       className={classnames(
         color === "light"
-          ? "text-white"
-          : "text-neutral-content",
+          ? "text-light"
+          : color === "dark"
+            ? "text-dark"
+            : color === "white"
+              ? "text-white"
+              : color === "neutral"
+                ? "text-neutral-content"
+                : "text-black",
         mapSizeToClassName(size),
         variant === "title"
           ? "font-bold"
