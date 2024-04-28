@@ -1,7 +1,7 @@
 import "expo-dev-client";
 import "../styles/global.css";
 
-import { Slot } from "expo-router";
+import { Slot, Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -20,7 +20,11 @@ function AppLayout() {
         <StatusBar style="dark" />
         <GestureHandlerRootView>
           <View className="bg-light flex flex-col w-full h-full justify-center">
-            <Slot />
+            <Stack
+              screenOptions={{
+                headerShown: false,
+              }}
+            />
           </View>
         </GestureHandlerRootView>
       </RootSiblingParent>
