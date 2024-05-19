@@ -1,7 +1,10 @@
 import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
 import { Image } from "expo-image";
-import { useLocalSearchParams } from "expo-router";
+import {
+  useLocalSearchParams,
+  usePathname,
+} from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -29,6 +32,7 @@ function Page() {
   const [product, setProduct] = useState<Product | null>(
     null,
   );
+  const pathName = usePathname();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -123,13 +127,7 @@ function Page() {
                 </View>
               </View>
             </ScrollView>
-            <View
-              className="pt-5 w-full border-t border-t-light px-6 flex flex-col justify-between gap-5 items-start"
-              style={{
-                paddingBottom:
-                  OS === "ios" ? bottom + 1 : bottom + 16,
-              }}
-            >
+            <View className="py-5 w-full border-t border-t-light px-6 flex flex-col justify-between gap-5 items-start">
               <View className="flex flex-row w-full justify-between items-center">
                 <View className="rounded-full border border-light py-2 h-12 px-4 flex flex-row gap-8 justify-between items-center">
                   <Pressable className="flex flex-row justify-center items-center">

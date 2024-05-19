@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import classNames from "classnames";
 import { Image } from "expo-image";
-import { Link } from "expo-router";
+import { Link, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import {
   ActivityIndicator,
@@ -21,6 +21,9 @@ function ProductCard({
   product: Product;
   className?: string;
 }) {
+  const { slug: collectionSlug } = useLocalSearchParams<{
+    slug: string;
+  }>();
   const [wishlisted, setWishlisted] =
     useState<boolean>(false);
 
@@ -31,8 +34,9 @@ function ProductCard({
   return (
     <Link
       href={{
-        pathname: "/products/[id]",
-        params: { id: product.id },
+        pathname:
+          "/collections/[collectionSlug]/products/[id]",
+        params: { collectionSlug, id: product.id },
       }}
       asChild
     >

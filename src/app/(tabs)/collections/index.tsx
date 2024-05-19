@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import CollectionList from "~/components/collection-list";
+import TitleBar from "~/components/core/title-bar";
 
 function Page() {
+  const { top } = useSafeAreaInsets();
   const [loading, setLoading] = useState<boolean>(true);
   const [collections, setCollections] = useState<string[]>(
     [],
@@ -26,7 +29,15 @@ function Page() {
   }, []);
 
   return (
-    <View className="flex-1 justify-center items-center flex flex-col  w-full h-full">
+    <View className="flex-1 justify-center items-center flex flex-col  w-full h-full bg-light">
+      <View
+        className="flex flex-col w-full justify-start items-start pb-4"
+        style={{
+          paddingTop: top + 16,
+        }}
+      >
+        <TitleBar title="collections" variant="dark" />
+      </View>
       <View className="flex-1 w-full flex-col flex h-full justify-center px-2 ">
         <CollectionList
           collections={collections}
