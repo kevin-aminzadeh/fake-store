@@ -38,7 +38,7 @@ function CollectionList({
   return collections?.length > 0 ? (
     <FlatList
       data={collections}
-      keyExtractor={(item, idx) => idx}
+      keyExtractor={(item, idx) => `${idx}`}
       showsVerticalScrollIndicator={false}
       numColumns={1}
       renderItem={({ item }) => (
